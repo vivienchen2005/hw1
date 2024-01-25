@@ -18,6 +18,35 @@ void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
+  bool even = false;
+  bool odd = false;
+  if (in != nullptr) {
+    Node* next_pointer = in->next;
+
+    if (in->value % 2 == 0) {
+      even = true;
+      evens = in;
+      evens->next = nullptr;
+    }
+    else {
+      odd = true;
+      odds = in;
+      odds->next = nullptr;
+    }
+
+    if (next_pointer != nullptr) {
+      if (odd) {
+        split(next_pointer, odds->next, evens);
+      }
+      else {
+        split(next_pointer, odds, evens->next);
+      }
+
+    }
+
+    in = nullptr;
+  }
+  
 }
 
 /* If you needed a helper function, write it here */
